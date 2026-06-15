@@ -14,6 +14,13 @@ class Settings(BaseSettings):
     
     @property
     def DATABASE_URL(self) -> str:
+        # Use Railway's injected DATABASE_URL if available
+        env_url = os.getenv("DATABASE_URL")
+        if env_url:
+            if env_url.startswith("postgres://"):
+                env_url = env_url.replace("postgres://", "postgresql://", 1)
+            return env_url
+
         user = self.POSTGRES_USER or "postgres"
         password = self.POSTGRES_PASSWORD or "postgres"
         host = self.POSTGRES_HOST or "localhost"
