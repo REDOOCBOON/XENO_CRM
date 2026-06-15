@@ -40,6 +40,9 @@ class Settings(BaseSettings):
     
     @property
     def CELERY_BROKER_URL(self) -> str:
+        env_redis = os.getenv("REDIS_URL")
+        if env_redis:
+            return env_redis
         host = self.REDIS_HOST or "localhost"
         port = self.REDIS_PORT or "6379"
         if not host.strip(): host = "localhost"
@@ -48,6 +51,9 @@ class Settings(BaseSettings):
         
     @property
     def CELERY_RESULT_BACKEND(self) -> str:
+        env_redis = os.getenv("REDIS_URL")
+        if env_redis:
+            return env_redis
         host = self.REDIS_HOST or "localhost"
         port = self.REDIS_PORT or "6379"
         if not host.strip(): host = "localhost"
