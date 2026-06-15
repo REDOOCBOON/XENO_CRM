@@ -1,0 +1,31 @@
+# Version Control Ignored Files
+
+# Environment variables (Sensitive)
+.env
+backend/.env
+frontend/.env.local
+
+# Python virtual environment
+backend/venv/
+backend/.venv/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Node dependencies and builds
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+frontend/out/
+build/
+dist/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

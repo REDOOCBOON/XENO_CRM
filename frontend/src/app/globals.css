@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 6%;
+    --card-foreground: 213 31% 91%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+
+    --primary: 262 80% 65%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --ring: 262 80% 65%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(224 71% 4%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(262 80% 45%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(262 80% 60%);
+}
+
+
+.gradient-border {
+  background: linear-gradient(hsl(224 71% 6%), hsl(224 71% 6%)) padding-box,
+              linear-gradient(135deg, hsl(262 80% 65%), hsl(210 80% 60%)) border-box;
+  border: 1px solid transparent;
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px hsl(262 80% 65% / 0.15);
+}
+
+.stat-card {
+  @apply gradient-border rounded-xl p-5 transition-all duration-200;
+}
+.stat-card:hover {
+  @apply glow-purple;
+  transform: translateY(-1px);
+}
+
+
+.status-sent { @apply bg-blue-500/10 text-blue-400 border border-blue-500/20; }
+.status-delivered { @apply bg-cyan-500/10 text-cyan-400 border border-cyan-500/20; }
+.status-opened { @apply bg-yellow-500/10 text-yellow-400 border border-yellow-500/20; }
+.status-clicked { @apply bg-orange-500/10 text-orange-400 border border-orange-500/20; }
+.status-converted { @apply bg-green-500/10 text-green-400 border border-green-500/20; }
+.status-failed { @apply bg-red-500/10 text-red-400 border border-red-500/20; }
+
+
+.risk-high { @apply bg-red-500/10 text-red-400 border border-red-500/20; }
+.risk-medium { @apply bg-yellow-500/10 text-yellow-400 border border-yellow-500/20; }
+.risk-active-vip { @apply bg-violet-500/10 text-violet-400 border border-violet-500/20; }
+.risk-active { @apply bg-green-500/10 text-green-400 border border-green-500/20; }
+
+
+@keyframes fill-bar {
+  from { width: 0%; }
+  to { width: var(--fill-width); }
+}
+.funnel-bar {
+  animation: fill-bar 0.8s ease-out forwards;
+}
