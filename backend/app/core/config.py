@@ -14,19 +14,38 @@ class Settings(BaseSettings):
     
     @property
     def DATABASE_URL(self) -> str:
-        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-
+        user = self.POSTGRES_USER or "postgres"
+        password = self.POSTGRES_PASSWORD or "postgres"
+        host = self.POSTGRES_HOST or "localhost"
+        port = self.POSTGRES_PORT or "5432"
+        db = self.POSTGRES_DB or "xeno_crm"
+        
+        if not user.strip(): user = "postgres"
+        if not password.strip(): password = "postgres"
+        if not host.strip(): host = "localhost"
+        if not port.strip(): port = "5432"
+        if not db.strip(): db = "xeno_crm"
+        
+        return f"postgresql://{user}:{password}@{host}:{port}/{db}"
 
     REDIS_HOST: str = os.getenv("REDIS_HOST", "localhost")
     REDIS_PORT: str = os.getenv("REDIS_PORT", "6379")
     
     @property
     def CELERY_BROKER_URL(self) -> str:
-        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0"
+        host = self.REDIS_HOST or "localhost"
+        port = self.REDIS_PORT or "6379"
+        if not host.strip(): host = "localhost"
+        if not port.strip(): port = "6379"
+        return f"redis://{host}:{port}/0"
         
     @property
     def CELERY_RESULT_BACKEND(self) -> str:
-        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/0"
+        host = self.REDIS_HOST or "localhost"
+        port = self.REDIS_PORT or "6379"
+        if not host.strip(): host = "localhost"
+        if not port.strip(): port = "6379"
+        return f"redis://{host}:{port}/0"
 
 
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
